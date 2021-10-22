@@ -1,21 +1,15 @@
-/*function lisame(){
-let lisatavSona = document.getElementById('task').value;
-let ul = document.getElementById("list");
-let li = document.createElement("li");
-
-li.appendChild(document.createTextNode(lisatavSona));
-ul.appendChild(li);
-
-}*/
-
 const form = document.querySelector('form');
 
 
 const taskList = document.querySelector(".collection");
 
+const delAll = document.querySelector("#deleteAll");
+
 form.addEventListener('submit', addTask);
 
 taskList.addEventListener('click', delItem);
+
+delAll.addEventListener("click", deleteAll)
 
 
 function addTask(event){
@@ -40,6 +34,7 @@ function addTask(event){
     li.appendChild(document.createTextNode(taskInput));
     const ul = document.querySelector(".collection");
     ul.appendChild(li);
+    document.querySelector('#task').value = "";
 
 
     event.preventDefault();
@@ -47,9 +42,18 @@ function addTask(event){
 
 function delItem(e){
     const ul = document.querySelector(".collection");
-    if(e.target.textContent == "X"){
-        if(confirm("Sure you want to delete")){
+    if(e.target.textContent === "X"){
+        if(confirm("Sure you want to delete?")){
         ul.removeChild(e.target.parentElement);
         }
     }
+}
+
+function deleteAll(){
+    const ul = document.querySelector(".collection");
+        if(confirm("Sure you want to delete all items?")){
+            while (ul.firstChild) {
+                ul.removeChild(ul.firstChild);
+            }
+        }
 }
